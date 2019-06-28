@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haocang.mapper.BankStationMapper" >
+  <resultMap id="BaseResultMap" type="com.haocang.pojo.BankStation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="deviceId" property="deviceid" jdbcType="VARCHAR" />
+    <result column="recDate" property="recdate" jdbcType="TIMESTAMP" />
+    <result column="PH" property="ph" jdbcType="REAL" />
+    <result column="DO" property="do2" jdbcType="REAL" />
+    <result column="WT" property="wt" jdbcType="REAL" />
+    <result column="COND" property="cond" jdbcType="REAL" />
+    <result column="TUB" property="tub" jdbcType="REAL" />
+    <result column="TP" property="tp" jdbcType="REAL" />
+    <result column="UVCOD" property="uvcod" jdbcType="REAL" />
+    <result column="NH3N" property="nh3n" jdbcType="REAL" />
+    <result column="CHL" property="chl" jdbcType="REAL" />
+    <result column="BGA" property="bga" jdbcType="REAL" />
+    <result column="dbDate" property="dbdate" jdbcType="TIMESTAMP" />
+    <result column="Voltage" property="voltage" jdbcType="REAL" />
+    <result column="cn" property="cn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, deviceId, recDate, PH, DO, WT, COND, TUB, TP, UVCOD, NH3N, CHL, BGA, dbDate, 
+    Voltage, cn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_bankstation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_b_bankstation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.haocang.pojo.BankStation" >
+    insert into t_b_bankstation (id, deviceId, recDate, 
+      PH, DO, WT, COND, 
+      TUB, TP, UVCOD, NH3N, 
+      CHL, BGA, dbDate, Voltage, 
+      cn)
+    values (#{id,jdbcType=INTEGER}, #{deviceid,jdbcType=VARCHAR}, #{recdate,jdbcType=TIMESTAMP}, 
+      #{ph,jdbcType=REAL}, #{do2,jdbcType=REAL}, #{wt,jdbcType=REAL}, #{cond,jdbcType=REAL}, 
+      #{tub,jdbcType=REAL}, #{tp,jdbcType=REAL}, #{uvcod,jdbcType=REAL}, #{nh3n,jdbcType=REAL}, 
+      #{chl,jdbcType=REAL}, #{bga,jdbcType=REAL}, #{dbdate,jdbcType=TIMESTAMP}, #{voltage,jdbcType=REAL}, 
+      #{cn,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haocang.pojo.BankStation" >
+    insert into t_b_bankstation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceid != null" >
+        deviceId,
+      </if>
+      <if test="recdate != null" >
+        recDate,
+      </if>
+      <if test="ph != null" >
+        PH,
+      </if>
+      <if test="do2 != null" >
+        DO,
+      </if>
+      <if test="wt != null" >
+        WT,
+      </if>
+      <if test="cond != null" >
+        COND,
+      </if>
+      <if test="tub != null" >
+        TUB,
+      </if>
+      <if test="tp != null" >
+        TP,
+      </if>
+      <if test="uvcod != null" >
+        UVCOD,
+      </if>
+      <if test="nh3n != null" >
+        NH3N,
+      </if>
+      <if test="chl != null" >
+        CHL,
+      </if>
+      <if test="bga != null" >
+        BGA,
+      </if>
+      <if test="dbdate != null" >
+        dbDate,
+      </if>
+      <if test="voltage != null" >
+        Voltage,
+      </if>
+      <if test="cn != null" >
+        cn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceid != null" >
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="recdate != null" >
+        #{recdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ph != null" >
+        #{ph,jdbcType=REAL},
+      </if>
+      <if test="do2 != null" >
+        #{do2,jdbcType=REAL},
+      </if>
+      <if test="wt != null" >
+        #{wt,jdbcType=REAL},
+      </if>
+      <if test="cond != null" >
+        #{cond,jdbcType=REAL},
+      </if>
+      <if test="tub != null" >
+        #{tub,jdbcType=REAL},
+      </if>
+      <if test="tp != null" >
+        #{tp,jdbcType=REAL},
+      </if>
+      <if test="uvcod != null" >
+        #{uvcod,jdbcType=REAL},
+      </if>
+      <if test="nh3n != null" >
+        #{nh3n,jdbcType=REAL},
+      </if>
+      <if test="chl != null" >
+        #{chl,jdbcType=REAL},
+      </if>
+      <if test="bga != null" >
+        #{bga,jdbcType=REAL},
+      </if>
+      <if test="dbdate != null" >
+        #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voltage != null" >
+        #{voltage,jdbcType=REAL},
+      </if>
+      <if test="cn != null" >
+        #{cn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haocang.pojo.BankStation" >
+    update t_b_bankstation
+    <set >
+      <if test="deviceid != null" >
+        deviceId = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="recdate != null" >
+        recDate = #{recdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ph != null" >
+        PH = #{ph,jdbcType=REAL},
+      </if>
+      <if test="do2 != null" >
+        DO = #{do2,jdbcType=REAL},
+      </if>
+      <if test="wt != null" >
+        WT = #{wt,jdbcType=REAL},
+      </if>
+      <if test="cond != null" >
+        COND = #{cond,jdbcType=REAL},
+      </if>
+      <if test="tub != null" >
+        TUB = #{tub,jdbcType=REAL},
+      </if>
+      <if test="tp != null" >
+        TP = #{tp,jdbcType=REAL},
+      </if>
+      <if test="uvcod != null" >
+        UVCOD = #{uvcod,jdbcType=REAL},
+      </if>
+      <if test="nh3n != null" >
+        NH3N = #{nh3n,jdbcType=REAL},
+      </if>
+      <if test="chl != null" >
+        CHL = #{chl,jdbcType=REAL},
+      </if>
+      <if test="bga != null" >
+        BGA = #{bga,jdbcType=REAL},
+      </if>
+      <if test="dbdate != null" >
+        dbDate = #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voltage != null" >
+        Voltage = #{voltage,jdbcType=REAL},
+      </if>
+      <if test="cn != null" >
+        cn = #{cn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haocang.pojo.BankStation" >
+    update t_b_bankstation
+    set deviceId = #{deviceid,jdbcType=VARCHAR},
+      recDate = #{recdate,jdbcType=TIMESTAMP},
+      PH = #{ph,jdbcType=REAL},
+      DO = #{do2,jdbcType=REAL},
+      WT = #{wt,jdbcType=REAL},
+      COND = #{cond,jdbcType=REAL},
+      TUB = #{tub,jdbcType=REAL},
+      TP = #{tp,jdbcType=REAL},
+      UVCOD = #{uvcod,jdbcType=REAL},
+      NH3N = #{nh3n,jdbcType=REAL},
+      CHL = #{chl,jdbcType=REAL},
+      BGA = #{bga,jdbcType=REAL},
+      dbDate = #{dbdate,jdbcType=TIMESTAMP},
+      Voltage = #{voltage,jdbcType=REAL},
+      cn = #{cn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--业务相关查询-->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_b_bankstation
+    where 1=1
+    <if test="startId != null">
+      AND id &gt; #{startId,jdbcType=INTEGER}
+    </if>
+    limit #{pageSize}
+  </select>
+
+  <select id="countTotal" resultType="java.lang.Long">
+    SELECT
+      COUNT(id)
+    FROM
+      t_b_bankstation
+  </select>
+
+
+  <!--业务相关查询-->
+  <select id="findListByTime" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_b_bankstation
+    where 1=1 AND recDate &lt; '2019-02-01 00:00:00'
+    <if test="startId != null">
+      AND id &gt; #{startId,jdbcType=INTEGER}
+    </if>
+    limit #{pageSize}
+  </select>
+
+  <select id="countTotalByTime" resultType="java.lang.Long">
+    SELECT
+    COUNT(id)
+    FROM
+    t_b_bankstation
+    where 1=1 AND recDate &lt; '2019-02-01 00:00:00'
+  </select>
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haocang.mapper.RainDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.haocang.pojo.RainDevice" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="RTUID" property="rtuid" jdbcType="VARCHAR" />
+    <result column="min10Pre" property="min10pre" jdbcType="REAL" />
+    <result column="sumPre" property="sumpre" jdbcType="REAL" />
+    <result column="recDate" property="recdate" jdbcType="TIMESTAMP" />
+    <result column="DbDate" property="dbdate" jdbcType="TIMESTAMP" />
+    <result column="screenings" property="screenings" jdbcType="INTEGER" />
+    <result column="rainlevel" property="rainlevel" jdbcType="VARCHAR" />
+    <result column="Voltage" property="voltage" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, RTUID, min10Pre, sumPre, recDate, DbDate, screenings, rainlevel, Voltage
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_raindevice
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_b_raindevice
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.haocang.pojo.RainDevice" >
+    insert into t_b_raindevice (Id, RTUID, min10Pre, 
+      sumPre, recDate, DbDate, 
+      screenings, rainlevel, Voltage
+      )
+    values (#{id,jdbcType=INTEGER}, #{rtuid,jdbcType=VARCHAR}, #{min10pre,jdbcType=REAL}, 
+      #{sumpre,jdbcType=REAL}, #{recdate,jdbcType=TIMESTAMP}, #{dbdate,jdbcType=TIMESTAMP}, 
+      #{screenings,jdbcType=INTEGER}, #{rainlevel,jdbcType=VARCHAR}, #{voltage,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.haocang.pojo.RainDevice" >
+    insert into t_b_raindevice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="rtuid != null" >
+        RTUID,
+      </if>
+      <if test="min10pre != null" >
+        min10Pre,
+      </if>
+      <if test="sumpre != null" >
+        sumPre,
+      </if>
+      <if test="recdate != null" >
+        recDate,
+      </if>
+      <if test="dbdate != null" >
+        DbDate,
+      </if>
+      <if test="screenings != null" >
+        screenings,
+      </if>
+      <if test="rainlevel != null" >
+        rainlevel,
+      </if>
+      <if test="voltage != null" >
+        Voltage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rtuid != null" >
+        #{rtuid,jdbcType=VARCHAR},
+      </if>
+      <if test="min10pre != null" >
+        #{min10pre,jdbcType=REAL},
+      </if>
+      <if test="sumpre != null" >
+        #{sumpre,jdbcType=REAL},
+      </if>
+      <if test="recdate != null" >
+        #{recdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dbdate != null" >
+        #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="screenings != null" >
+        #{screenings,jdbcType=INTEGER},
+      </if>
+      <if test="rainlevel != null" >
+        #{rainlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null" >
+        #{voltage,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haocang.pojo.RainDevice" >
+    update t_b_raindevice
+    <set >
+      <if test="rtuid != null" >
+        RTUID = #{rtuid,jdbcType=VARCHAR},
+      </if>
+      <if test="min10pre != null" >
+        min10Pre = #{min10pre,jdbcType=REAL},
+      </if>
+      <if test="sumpre != null" >
+        sumPre = #{sumpre,jdbcType=REAL},
+      </if>
+      <if test="recdate != null" >
+        recDate = #{recdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dbdate != null" >
+        DbDate = #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="screenings != null" >
+        screenings = #{screenings,jdbcType=INTEGER},
+      </if>
+      <if test="rainlevel != null" >
+        rainlevel = #{rainlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null" >
+        Voltage = #{voltage,jdbcType=REAL},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haocang.pojo.RainDevice" >
+    update t_b_raindevice
+    set RTUID = #{rtuid,jdbcType=VARCHAR},
+      min10Pre = #{min10pre,jdbcType=REAL},
+      sumPre = #{sumpre,jdbcType=REAL},
+      recDate = #{recdate,jdbcType=TIMESTAMP},
+      DbDate = #{dbdate,jdbcType=TIMESTAMP},
+      screenings = #{screenings,jdbcType=INTEGER},
+      rainlevel = #{rainlevel,jdbcType=VARCHAR},
+      Voltage = #{voltage,jdbcType=REAL}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--业务相关查询-->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_b_raindevice
+    where 1=1
+    <if test="startId != null">
+      AND id &gt; #{startId,jdbcType=INTEGER}
+    </if>
+    limit #{pageSize}
+  </select>
+
+  <select id="countTotal" resultType="java.lang.Long">
+    SELECT
+    COUNT(id)
+    FROM
+    t_b_raindevice
+  </select>
+</mapper>

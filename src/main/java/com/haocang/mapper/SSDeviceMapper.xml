@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haocang.mapper.SSDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.haocang.pojo.SSDevice" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="rtuid" property="rtuid" jdbcType="VARCHAR" />
+    <result column="ss" property="ss" jdbcType="REAL" />
+    <result column="recDate" property="recdate" jdbcType="TIMESTAMP" />
+    <result column="Voltage" property="voltage" jdbcType="REAL" />
+    <result column="DbDate" property="dbdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rtuid, ss, recDate, Voltage, DbDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_ssdevice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_b_ssdevice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.haocang.pojo.SSDevice" >
+    insert into t_b_ssdevice (id, rtuid, ss, recDate, 
+      Voltage, DbDate)
+    values (#{id,jdbcType=INTEGER}, #{rtuid,jdbcType=VARCHAR}, #{ss,jdbcType=REAL}, #{recdate,jdbcType=TIMESTAMP}, 
+      #{voltage,jdbcType=REAL}, #{dbdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haocang.pojo.SSDevice" >
+    insert into t_b_ssdevice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="rtuid != null" >
+        rtuid,
+      </if>
+      <if test="ss != null" >
+        ss,
+      </if>
+      <if test="recdate != null" >
+        recDate,
+      </if>
+      <if test="voltage != null" >
+        Voltage,
+      </if>
+      <if test="dbdate != null" >
+        DbDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rtuid != null" >
+        #{rtuid,jdbcType=VARCHAR},
+      </if>
+      <if test="ss != null" >
+        #{ss,jdbcType=REAL},
+      </if>
+      <if test="recdate != null" >
+        #{recdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voltage != null" >
+        #{voltage,jdbcType=REAL},
+      </if>
+      <if test="dbdate != null" >
+        #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haocang.pojo.SSDevice" >
+    update t_b_ssdevice
+    <set >
+      <if test="rtuid != null" >
+        rtuid = #{rtuid,jdbcType=VARCHAR},
+      </if>
+      <if test="ss != null" >
+        ss = #{ss,jdbcType=REAL},
+      </if>
+      <if test="recdate != null" >
+        recDate = #{recdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voltage != null" >
+        Voltage = #{voltage,jdbcType=REAL},
+      </if>
+      <if test="dbdate != null" >
+        DbDate = #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haocang.pojo.SSDevice" >
+    update t_b_ssdevice
+    set rtuid = #{rtuid,jdbcType=VARCHAR},
+      ss = #{ss,jdbcType=REAL},
+      recDate = #{recdate,jdbcType=TIMESTAMP},
+      Voltage = #{voltage,jdbcType=REAL},
+      DbDate = #{dbdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--业务相关查询-->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_b_ssdevice
+    where 1=1
+    <if test="startId != null">
+      AND id &gt; #{startId,jdbcType=INTEGER}
+    </if>
+    limit #{pageSize}
+  </select>
+
+  <select id="countTotal" resultType="java.lang.Long">
+    SELECT
+    COUNT(id)
+    FROM
+    t_b_ssdevice
+  </select>
+</mapper>

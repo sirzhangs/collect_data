@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haocang.mapper.WaterDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.haocang.pojo.WaterDevice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="deviceId" property="deviceid" jdbcType="VARCHAR" />
+    <result column="pd" property="pd" jdbcType="REAL" />
+    <result column="hd" property="hd" jdbcType="REAL" />
+    <result column="recDate" property="recdate" jdbcType="TIMESTAMP" />
+    <result column="dbDate" property="dbdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, deviceId, pd, hd, recDate, dbDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_waterdevice
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_b_waterdevice
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.haocang.pojo.WaterDevice" >
+    insert into t_b_waterdevice (id, deviceId, pd, 
+      hd, recDate, dbDate
+      )
+    values (#{id,jdbcType=BIGINT}, #{deviceid,jdbcType=VARCHAR}, #{pd,jdbcType=REAL}, 
+      #{hd,jdbcType=REAL}, #{recdate,jdbcType=TIMESTAMP}, #{dbdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.haocang.pojo.WaterDevice" >
+    insert into t_b_waterdevice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceid != null" >
+        deviceId,
+      </if>
+      <if test="pd != null" >
+        pd,
+      </if>
+      <if test="hd != null" >
+        hd,
+      </if>
+      <if test="recdate != null" >
+        recDate,
+      </if>
+      <if test="dbdate != null" >
+        dbDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deviceid != null" >
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="pd != null" >
+        #{pd,jdbcType=REAL},
+      </if>
+      <if test="hd != null" >
+        #{hd,jdbcType=REAL},
+      </if>
+      <if test="recdate != null" >
+        #{recdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dbdate != null" >
+        #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haocang.pojo.WaterDevice" >
+    update t_b_waterdevice
+    <set >
+      <if test="deviceid != null" >
+        deviceId = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="pd != null" >
+        pd = #{pd,jdbcType=REAL},
+      </if>
+      <if test="hd != null" >
+        hd = #{hd,jdbcType=REAL},
+      </if>
+      <if test="recdate != null" >
+        recDate = #{recdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dbdate != null" >
+        dbDate = #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haocang.pojo.WaterDevice" >
+    update t_b_waterdevice
+    set deviceId = #{deviceid,jdbcType=VARCHAR},
+      pd = #{pd,jdbcType=REAL},
+      hd = #{hd,jdbcType=REAL},
+      recDate = #{recdate,jdbcType=TIMESTAMP},
+      dbDate = #{dbdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--业务相关查询-->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_b_waterdevice
+    where 1=1
+    <if test="startId != null">
+      AND id &gt; #{startId,jdbcType=INTEGER}
+    </if>
+    limit #{pageSize}
+  </select>
+
+  <select id="countTotal" resultType="java.lang.Long">
+    SELECT
+    COUNT(id)
+    FROM
+    t_b_waterdevice
+  </select>
+</mapper>

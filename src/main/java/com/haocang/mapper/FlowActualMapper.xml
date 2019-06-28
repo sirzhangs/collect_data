@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haocang.mapper.FlowActualMapper" >
+  <resultMap id="BaseResultMap" type="com.haocang.pojo.FlowActual" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="RTUID" property="rtuid" jdbcType="VARCHAR" />
+    <result column="Voltage" property="voltage" jdbcType="REAL" />
+    <result column="flowRateId" property="flowrateid" jdbcType="VARCHAR" />
+    <result column="FlowRate" property="flowrate" jdbcType="REAL" />
+    <result column="waterlevelId" property="waterlevelid" jdbcType="VARCHAR" />
+    <result column="WaterLevel" property="waterlevel" jdbcType="REAL" />
+    <result column="vellocityId" property="vellocityid" jdbcType="VARCHAR" />
+    <result column="Velocity" property="velocity" jdbcType="REAL" />
+    <result column="TotalFlow" property="totalflow" jdbcType="DOUBLE" />
+    <result column="RTUName" property="rtuname" jdbcType="VARCHAR" />
+    <result column="Manufactuer" property="manufactuer" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="CollDatetime" property="colldatetime" jdbcType="TIMESTAMP" />
+    <result column="dbDate" property="dbdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, RTUID, Voltage, flowRateId, FlowRate, waterlevelId, WaterLevel, vellocityId, 
+    Velocity, TotalFlow, RTUName, Manufactuer, Remark, CollDatetime, dbDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_flowactual
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_b_flowactual
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.haocang.pojo.FlowActual" >
+    insert into t_b_flowactual (Id, RTUID, Voltage, 
+      flowRateId, FlowRate, waterlevelId, 
+      WaterLevel, vellocityId, Velocity, 
+      TotalFlow, RTUName, Manufactuer, 
+      Remark, CollDatetime, dbDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{rtuid,jdbcType=VARCHAR}, #{voltage,jdbcType=REAL}, 
+      #{flowrateid,jdbcType=VARCHAR}, #{flowrate,jdbcType=REAL}, #{waterlevelid,jdbcType=VARCHAR}, 
+      #{waterlevel,jdbcType=REAL}, #{vellocityid,jdbcType=VARCHAR}, #{velocity,jdbcType=REAL}, 
+      #{totalflow,jdbcType=DOUBLE}, #{rtuname,jdbcType=VARCHAR}, #{manufactuer,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{colldatetime,jdbcType=TIMESTAMP}, #{dbdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.haocang.pojo.FlowActual" >
+    insert into t_b_flowactual
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="rtuid != null" >
+        RTUID,
+      </if>
+      <if test="voltage != null" >
+        Voltage,
+      </if>
+      <if test="flowrateid != null" >
+        flowRateId,
+      </if>
+      <if test="flowrate != null" >
+        FlowRate,
+      </if>
+      <if test="waterlevelid != null" >
+        waterlevelId,
+      </if>
+      <if test="waterlevel != null" >
+        WaterLevel,
+      </if>
+      <if test="vellocityid != null" >
+        vellocityId,
+      </if>
+      <if test="velocity != null" >
+        Velocity,
+      </if>
+      <if test="totalflow != null" >
+        TotalFlow,
+      </if>
+      <if test="rtuname != null" >
+        RTUName,
+      </if>
+      <if test="manufactuer != null" >
+        Manufactuer,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="colldatetime != null" >
+        CollDatetime,
+      </if>
+      <if test="dbdate != null" >
+        dbDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rtuid != null" >
+        #{rtuid,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null" >
+        #{voltage,jdbcType=REAL},
+      </if>
+      <if test="flowrateid != null" >
+        #{flowrateid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowrate != null" >
+        #{flowrate,jdbcType=REAL},
+      </if>
+      <if test="waterlevelid != null" >
+        #{waterlevelid,jdbcType=VARCHAR},
+      </if>
+      <if test="waterlevel != null" >
+        #{waterlevel,jdbcType=REAL},
+      </if>
+      <if test="vellocityid != null" >
+        #{vellocityid,jdbcType=VARCHAR},
+      </if>
+      <if test="velocity != null" >
+        #{velocity,jdbcType=REAL},
+      </if>
+      <if test="totalflow != null" >
+        #{totalflow,jdbcType=DOUBLE},
+      </if>
+      <if test="rtuname != null" >
+        #{rtuname,jdbcType=VARCHAR},
+      </if>
+      <if test="manufactuer != null" >
+        #{manufactuer,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="colldatetime != null" >
+        #{colldatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dbdate != null" >
+        #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haocang.pojo.FlowActual" >
+    update t_b_flowactual
+    <set >
+      <if test="rtuid != null" >
+        RTUID = #{rtuid,jdbcType=VARCHAR},
+      </if>
+      <if test="voltage != null" >
+        Voltage = #{voltage,jdbcType=REAL},
+      </if>
+      <if test="flowrateid != null" >
+        flowRateId = #{flowrateid,jdbcType=VARCHAR},
+      </if>
+      <if test="flowrate != null" >
+        FlowRate = #{flowrate,jdbcType=REAL},
+      </if>
+      <if test="waterlevelid != null" >
+        waterlevelId = #{waterlevelid,jdbcType=VARCHAR},
+      </if>
+      <if test="waterlevel != null" >
+        WaterLevel = #{waterlevel,jdbcType=REAL},
+      </if>
+      <if test="vellocityid != null" >
+        vellocityId = #{vellocityid,jdbcType=VARCHAR},
+      </if>
+      <if test="velocity != null" >
+        Velocity = #{velocity,jdbcType=REAL},
+      </if>
+      <if test="totalflow != null" >
+        TotalFlow = #{totalflow,jdbcType=DOUBLE},
+      </if>
+      <if test="rtuname != null" >
+        RTUName = #{rtuname,jdbcType=VARCHAR},
+      </if>
+      <if test="manufactuer != null" >
+        Manufactuer = #{manufactuer,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="colldatetime != null" >
+        CollDatetime = #{colldatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dbdate != null" >
+        dbDate = #{dbdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haocang.pojo.FlowActual" >
+    update t_b_flowactual
+    set RTUID = #{rtuid,jdbcType=VARCHAR},
+      Voltage = #{voltage,jdbcType=REAL},
+      flowRateId = #{flowrateid,jdbcType=VARCHAR},
+      FlowRate = #{flowrate,jdbcType=REAL},
+      waterlevelId = #{waterlevelid,jdbcType=VARCHAR},
+      WaterLevel = #{waterlevel,jdbcType=REAL},
+      vellocityId = #{vellocityid,jdbcType=VARCHAR},
+      Velocity = #{velocity,jdbcType=REAL},
+      TotalFlow = #{totalflow,jdbcType=DOUBLE},
+      RTUName = #{rtuname,jdbcType=VARCHAR},
+      Manufactuer = #{manufactuer,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      CollDatetime = #{colldatetime,jdbcType=TIMESTAMP},
+      dbDate = #{dbdate,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--业务相关查询-->
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_b_flowactual
+    where 1=1
+    <if test="startId != null">
+      AND id &gt; #{startId,jdbcType=INTEGER}
+    </if>
+    limit #{pageSize}
+  </select>
+
+  <select id="countTotal" resultType="java.lang.Long">
+    SELECT
+    COUNT(id)
+    FROM
+    t_b_flowactual
+  </select>
+</mapper>

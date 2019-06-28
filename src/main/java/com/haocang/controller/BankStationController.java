@@ -73,7 +73,7 @@ public class BankStationController {
                 map.put("voltage",voltage);
                 List<OpentsdbPutRequest> resultList = TransformToOpenTSDBUtil.transform(map,timestamp,tags);
                 HttpUtils.postForJSON("http://117.131.40.152:8088/api/put?details",JSON.toJSONString(resultList, SerializerFeature.DisableCircularReferenceDetect));
-                logger.info("【设备类型:岸边站，总数："+total+"累计执行："+sum+",下次开始ID："+startId+"】："+JSON.toJSONString(resultList, SerializerFeature.DisableCircularReferenceDetect));
+//                logger.info("【设备类型:岸边站，总数："+total+"累计执行："+sum+",下次开始ID："+startId+"】："+JSON.toJSONString(resultList, SerializerFeature.DisableCircularReferenceDetect));
                 sum++;
             }
             count++;
